@@ -1,6 +1,6 @@
 import React from "react";
-import CameraExample from "./components/CameraExample";
+import CameraScreen from "./screens/CameraScreen";
 
 export default function App() {
-  return <CameraExample />;
+  return <CameraScreen />;
 }
