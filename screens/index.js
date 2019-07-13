@@ -1,3 +1,3 @@
-export { default as Login } from "./Login";
-export { default as Home } from "./Home";
+export { default as LoginScreen } from "./LoginScreen";
+export { default as HomeScreen } from "./HomeScreen";
 export { default as CameraScreen } from "./CameraScreen";

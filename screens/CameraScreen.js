@@ -4,7 +4,7 @@ import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Linking } from "expo";
 
-export default function CameraExample() {
+export default function CameraScreen() {
   const [state, setState] = useState({
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,

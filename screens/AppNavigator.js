@@ -1,14 +1,15 @@
 import { createStackNavigator } from "react-navigation";
-import { Login, Home, CameraScreen } from ".";
+import { LoginScreen, HomeScreen, CameraScreen } from ".";
 
 const AppNavigator = createStackNavigator(
   {
-    Login,
-    Home,
+    LoginScreen,
+    HomeScreen,
     CameraScreen
   },
   {
-    initialRouteName: "Login"
+    // initialRouteName: "LoginScreen"
+    initialRouteName: "HomeScreen"
   }
 );
 

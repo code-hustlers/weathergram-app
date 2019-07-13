@@ -18,10 +18,13 @@ import { StyleSheet } from "react-native";
 // import { Constants } from "expo";
 // import withTopNavigator from "../components/withTopNavigator";
 
-const Login = () => {
+const LoginScreen = ({ navigation: { navigate } }) => {
   const [email, setEmail] = useState("");
   const login = () => {
-    fetch(`${process.env.API_URL}/user`, {
+    // navigate("HomeScreen", { user_seq: 10 });
+
+    // fetch(`${process.env.API_URL}/user`, {
+    fetch(`http://13.125.51.65:8080/user`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -34,6 +37,9 @@ const Login = () => {
       .then(res => res.json())
       .then(resJson => {
         console.log("TCL: login -> resJson", resJson);
+        const { user_seq } = resJson;
+        // navigate("HomeScreen");
+        navigate("HomeScreen", { user_seq });
       })
       .catch(error => console.error(error));
   };
@@ -71,7 +77,7 @@ const Login = () => {
   );
 };
 
-Login.navigationOptions = ({ navigation }) => ({
+LoginScreen.navigationOptions = ({ navigation: { navigate } }) => ({
   // headerStyle: { marginTop: Constants.statusBarHeight }
   // headerForceInset: { top: "never", bottom: "never" }
   // headerStyle: { marginTop: 30 },
@@ -80,11 +86,12 @@ Login.navigationOptions = ({ navigation }) => ({
     <Icon
       name="ios-camera"
       style={{ paddingLeft: 16 }}
-      onPress={() => navigation.navigate("CameraScreen")}
+      onPress={() => navigate("CameraScreen")}
       // onPress={() => alert(1)}
     />
   ),
-  title: "Weathergram",
+  title: "Login",
+  // title: "Weathergram",
   headerRight: <Icon name="ios-send" style={{ paddingRight: 16 }} />
 });
 
@@ -114,4 +121,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default LoginScreen;
