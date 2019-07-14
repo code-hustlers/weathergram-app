@@ -23,8 +23,7 @@ const LoginScreen = ({ navigation: { navigate } }) => {
   const login = () => {
     // navigate("HomeScreen", { user_seq: 10 });
 
-    // fetch(`${process.env.API_URL}/user`, {
-    fetch(`http://13.125.51.65:8080/user`, {
+    fetch(`${process.env.API_URL}/user`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -36,9 +35,7 @@ const LoginScreen = ({ navigation: { navigate } }) => {
     })
       .then(res => res.json())
       .then(resJson => {
-        console.log("TCL: login -> resJson", resJson);
         const { user_seq } = resJson;
-        // navigate("HomeScreen");
         navigate("HomeScreen", { user_seq });
       })
       .catch(error => console.error(error));
@@ -86,7 +83,8 @@ LoginScreen.navigationOptions = ({ navigation: { navigate } }) => ({
     <Icon
       name="ios-camera"
       style={{ paddingLeft: 16 }}
-      onPress={() => navigate("CameraScreen")}
+      onPress={() => navigate("CameraExample")}
+      // onPress={() => navigate("CameraScreen")}
       // onPress={() => alert(1)}
     />
   ),

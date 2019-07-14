@@ -105,13 +105,23 @@ const HomeScreen = () => {
   );
 };
 
-HomeScreen.navigationOptions = ({ navigation }) => ({
+HomeScreen.navigationOptions = ({ navigation: { navigate } }) => ({
   title: "Weathergram",
   // headerTintColor: "#fff",
   headerTitleStyle: {
     fontWeight: "bold",
     textAlign: "center"
-  }
+  },
+  headerLeft: (
+    <Icon
+      name="ios-camera"
+      style={{ paddingLeft: 16 }}
+      onPress={() => navigate("CameraExample")}
+      // onPress={() => navigate("CameraScreen")}
+      // onPress={() => alert(1)}
+    />
+  ),
+  headerRight: <Icon name="ios-send" style={{ paddingRight: 16 }} />
 });
 
 const styles = StyleSheet.create({

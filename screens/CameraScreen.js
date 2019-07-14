@@ -7,8 +7,8 @@ import { Linking } from "expo";
 export default function CameraScreen() {
   const [state, setState] = useState({
     hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
-    uri: null
+    type: Camera.Constants.Type.back
+    // uri: null
   });
   // const cameraEl = useRef(null);
   let cameraEl;
@@ -29,8 +29,32 @@ export default function CameraScreen() {
             alert("Success!");
           }
         })
-        .then(({ uri, base64 }) => {
-          setState({ ...state, uri });
+        .then(({ base64 }) => {
+          console.log("TCL: takePicture -> base64", base64);
+          // setState({ ...state, uri });
+
+          // fetch(`${process.env.API_URL}/photo`, {
+          //   method: "POST",
+          //   headers: {
+          //     Accept: "application/json",
+          //     "Content-Type": "application/json"
+          //   },
+          //   body: JSON.stringify({
+          //     // photo_contents,
+          //     photo_binary: base64,
+          //     photo_location: "@Seoul",
+          //     user_seq: 10
+          //   })
+          // })
+          //   .then(res => res.json())
+          //   .then(resJson => {
+          //     const { user_seq } = resJson;
+
+          //     alert("업로드 완료!");
+          //     navigate("HomeScreen", { user_seq });
+          //   })
+          //   .catch(error => console.error(error));
+
           // Post
           // Linking.makeUrl("www.naver.com");
           // Linking.makeUrl(base64);
@@ -43,7 +67,7 @@ export default function CameraScreen() {
     permissionRequest();
   }, []);
 
-  const { hasCameraPermission, type, uri } = state;
+  const { hasCameraPermission, type } = state;
   if (hasCameraPermission === null) {
     return <View />;
   } else if (hasCameraPermission === false) {
@@ -51,20 +75,31 @@ export default function CameraScreen() {
   } else {
     return (
       <View style={{ flex: 1 }}>
-        {uri ? (
+        {/* {uri ? (
           <Image source={uri} />
-        ) : (
-          <Camera
-            style={{ flex: 1 }}
-            type={type}
-            // ref={cameraEl}
-            ref={ref => (cameraEl = ref)}
+        ) : ( */}
+        <Camera
+          style={{ flex: 1 }}
+          type={type}
+          // ref={cameraEl}
+          ref={ref => {
+            cameraEl = ref;
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "transparent",
+              flexDirection: "row"
+            }}
           >
             <View
               style={{
-                flex: 1,
-                backgroundColor: "transparent",
-                flexDirection: "row"
+                display: "flex",
+                // flex: 0.1,
+                background: "pink",
+                alignSelf: "stretch",
+                alignItems: "center"
               }}
             >
               <TouchableOpacity
@@ -91,16 +126,17 @@ export default function CameraScreen() {
               </TouchableOpacity>
               <Button
                 style={{
-                  flex: 0.1,
-                  alignSelf: "flex-end",
-                  alignItems: "center"
+                  flex: 0.1
+                  // alignSelf: "flex-end",
+                  // alignItems: "center"
                 }}
                 title="Take it!"
                 onPress={takePicture}
               />
             </View>
-          </Camera>
-        )}
+          </View>
+        </Camera>
+        {/* )} */}
       </View>
     );
   }
