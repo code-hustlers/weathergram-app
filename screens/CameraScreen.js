@@ -30,9 +30,7 @@ export default function CameraScreen() {
           }
         })
         .then(({ base64 }) => {
-          console.log("TCL: takePicture -> base64", base64);
           // setState({ ...state, uri });
-
           // fetch(`${process.env.API_URL}/photo`, {
           //   method: "POST",
           //   headers: {
@@ -49,12 +47,10 @@ export default function CameraScreen() {
           //   .then(res => res.json())
           //   .then(resJson => {
           //     const { user_seq } = resJson;
-
           //     alert("업로드 완료!");
           //     navigate("HomeScreen", { user_seq });
           //   })
           //   .catch(error => console.error(error));
-
           // Post
           // Linking.makeUrl("www.naver.com");
           // Linking.makeUrl(base64);
