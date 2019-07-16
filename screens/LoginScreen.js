@@ -14,7 +14,7 @@ import {
   Button
 } from "native-base";
 import { StyleSheet } from "react-native";
-import env from "../env";
+import env from "../.env";
 
 // import { Constants } from "expo";
 // import withTopNavigator from "../components/withTopNavigator";

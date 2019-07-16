@@ -11,7 +11,7 @@ import {
   Body,
   View
 } from "native-base";
-import env from "../env";
+import env from "../.env";
 
 // const HomeScreen = ({ navigation }) => {
 
