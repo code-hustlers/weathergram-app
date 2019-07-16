@@ -14,6 +14,7 @@ import {
   Button
 } from "native-base";
 import { StyleSheet } from "react-native";
+import env from "../.env";
 
 // import { Constants } from "expo";
 // import withTopNavigator from "../components/withTopNavigator";
@@ -23,7 +24,7 @@ const LoginScreen = ({ navigation: { navigate } }) => {
   const login = () => {
     // navigate("HomeScreen", { user_seq: 10 });
 
-    fetch(`${process.env.API_URL}/user`, {
+    fetch(`${env.API_URL}/user`, {
       method: "POST",
       headers: {
         Accept: "application/json",

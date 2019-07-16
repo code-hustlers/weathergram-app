@@ -11,6 +11,7 @@ import {
   Body,
   View
 } from "native-base";
+import env from "../.env";
 
 // const HomeScreen = ({ navigation }) => {
 
@@ -26,11 +27,12 @@ const HomeScreen = () => {
 
   useEffect(() => {
     setState({ ...state, loading: true });
-    fetch(`${process.env.API_URL}/photo`, {
+    fetch(`${env.API_URL}/photo`, {
       method: "GET"
     })
       .then(res => res.json())
       .then(resJson => {
+        console.log("TCL: HomeScreen -> resJson", resJson);
         // console.log("TCL: login -> resJson", resJson);
         // const { photo_seq, photo_contents, photo_binary } = resJson;
         setState({ ...state, loading: false, data: resJson });
