@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
+import env from "../env";
 
 export default class CameraExample extends React.Component {
   state = {
@@ -30,7 +31,7 @@ export default class CameraExample extends React.Component {
           alert("onPictureSaved Success!");
         }
       });
-      fetch(`${process.env.API_URL}/photo`, {
+      fetch(`${env.API_URL}/photo`, {
         method: "POST",
         headers: {
           Accept: "application/json",
