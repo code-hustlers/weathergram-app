@@ -1,15 +1,23 @@
 import { createStackNavigator } from "react-navigation";
-import { LoginScreen, HomeScreen, CameraScreen, CameraExample } from ".";
+import {
+  LoginScreen,
+  HomeScreen,
+  CameraScreen,
+  CameraExample,
+  CameraBasic
+} from ".";
 
 const AppNavigator = createStackNavigator(
   {
     LoginScreen,
     HomeScreen,
     CameraScreen,
-    CameraExample
+    CameraExample,
+    CameraBasic
   },
   {
-    initialRouteName: "LoginScreen"
+    initialRouteName: "CameraBasic"
+    // initialRouteName: "LoginScreen"
     // initialRouteName: "CameraScreen"
     // initialRouteName: "HomeScreen"
     // initialRouteName: "CameraExample"

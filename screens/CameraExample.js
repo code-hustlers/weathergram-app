@@ -24,13 +24,28 @@ export default class CameraExample extends React.Component {
     console.log("TCL: CameraExample -> snap -> user_seq", user_seq);
 
     if (this.camera) {
-      const { base64 } = await this.camera.takePictureAsync({
-        base64: true,
-        quality: 0.5,
-        onPictureSaved: () => {
-          alert("onPictureSaved Success!");
-        }
-      });
+      console.log("TCL: CameraExample -> snap -> this.camera", this.camera);
+      // const { uri, base64 } = await this.camera.takePictureAsync({
+      //   base64: true,
+      //   quality: 0.5,
+      //   onPictureSaved: () => {
+      //     alert("onPictureSaved Success!");
+      //   }
+      // });
+      // console.log("TCL: CameraExample -> snap -> uri", uri);
+      this.camera
+        .takePictureAsync({
+          base64: true,
+          quality: 0.5,
+          onPictureSaved: () => {
+            alert("onPictureSaved Success!");
+          }
+        })
+        .then(({ uri, base64 }) => {
+          console.log("TCL: CameraExample -> snap -> uri, base64", uri, base64);
+        })
+        .catch(error => console.error(error));
+
       fetch(`${env.API_URL}/photo`, {
         method: "POST",
         headers: {
