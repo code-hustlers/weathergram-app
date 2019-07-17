@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import * as ImagePicker from "expo-image-picker";
 import { Image, StyleSheet, ScrollView } from "react-native";
 import {
   Card,
@@ -14,11 +15,11 @@ import {
 import env from "../.env";
 
 // const HomeScreen = ({ navigation }) => {
+const user_seq = 10;
 
 const HomeScreen = () => {
   // console.log("TCL: HomeScreen -> props", props);
   // const { user_seq } = navigation.state.params;
-  const user_seq = 10;
   const [state, setState] = useState({
     loading: false,
     error: null,
@@ -32,7 +33,6 @@ const HomeScreen = () => {
     })
       .then(res => res.json())
       .then(resJson => {
-        console.log("TCL: HomeScreen -> resJson", resJson);
         // console.log("TCL: login -> resJson", resJson);
         // const { photo_seq, photo_contents, photo_binary } = resJson;
         setState({ ...state, loading: false, data: resJson });
@@ -107,6 +107,27 @@ const HomeScreen = () => {
   );
 };
 
+const handleRightClick = () => {
+  ImagePicker.launchImageLibraryAsync().then(({ uri }) => {
+    fetch(`${env.API_URL}/photo`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data"
+      },
+      body: JSON.stringify({
+        file: uri,
+        photo_contents: "컨텐츠",
+        photo_location: "#Suwon",
+        tags: "#요미",
+        user_seq
+      })
+    }).then(res => {
+      console.log("TCL: handleRightClick -> res", res);
+    });
+  });
+};
+
 HomeScreen.navigationOptions = ({ navigation: { navigate } }) => ({
   title: "Weathergram",
   // headerTintColor: "#fff",
@@ -120,10 +141,16 @@ HomeScreen.navigationOptions = ({ navigation: { navigate } }) => ({
       style={{ paddingLeft: 16 }}
       onPress={() => navigate("CameraExample")}
       // onPress={() => navigate("CameraScreen")}
-      // onPress={() => alert(1)}
     />
   ),
-  headerRight: <Icon name="ios-send" style={{ paddingRight: 16 }} />
+  headerRight: (
+    <Icon
+      type="AntDesign"
+      name="picture"
+      style={{ paddingRight: 16 }}
+      onPress={handleRightClick}
+    />
+  )
 });
 
 const styles = StyleSheet.create({

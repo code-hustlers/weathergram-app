@@ -16,10 +16,10 @@ const AppNavigator = createStackNavigator(
     CameraBasic
   },
   {
-    initialRouteName: "CameraBasic"
+    // initialRouteName: "CameraBasic"
     // initialRouteName: "LoginScreen"
     // initialRouteName: "CameraScreen"
-    // initialRouteName: "HomeScreen"
+    initialRouteName: "HomeScreen"
     // initialRouteName: "CameraExample"
   }
 );
