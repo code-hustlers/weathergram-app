@@ -23,7 +23,8 @@ const HomeScreen = () => {
   const [state, setState] = useState({
     loading: false,
     error: null,
-    data: null
+    data: null,
+    uri: null
   });
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const HomeScreen = () => {
       });
   }, []);
 
-  const { loading, error, data } = state;
+  const { loading, error, data, uri } = state;
   const { container, card, image } = styles;
 
   // if (loading) {
@@ -63,6 +64,7 @@ const HomeScreen = () => {
   // } else if () {
   return (
     <ScrollView style={container}>
+      <Image source={{ uri }} style={image} />
       {loading && (
         <View>
           <Text>Loading</Text>
@@ -109,6 +111,7 @@ const HomeScreen = () => {
 
 const handleRightClick = () => {
   ImagePicker.launchImageLibraryAsync().then(({ uri }) => {
+    setState({ uri });
     fetch(`${env.API_URL}/photo`, {
       method: "POST",
       headers: {
